@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'android-library'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "cc.easyandroid.settingview"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1

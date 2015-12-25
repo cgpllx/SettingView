@@ -9,8 +9,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
 
-import cc.easyandroid.settingview.setting.GroupView;
-
 public class ItemBgSelectorUtil {
 	/**
 	 * 设置Selector
@@ -84,7 +82,7 @@ public class ItemBgSelectorUtil {
 		int inner_circle_size = out_circle_Size - linewidth < 0 ? 0 : out_circle_Size - linewidth;
 		int circle_size = bg ? inner_circle_size : out_circle_Size;// 内圆半径为外圆减线宽
 		switch (rowViewPosition) {
-			case  RowViewPosition.UP:
+			case RowViewPosition.UP:
 				gd.setCornerRadii(new float[] { circle_size, circle_size, circle_size, circle_size, //
 						0, 0, 0, 0 });
 				break;

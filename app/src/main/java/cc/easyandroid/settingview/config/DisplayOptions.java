@@ -4,6 +4,7 @@ import android.util.TypedValue;
 
 import cc.easyandroid.settingview.core.IRowStyle;
 
+
 /**
  * 选择器的参数
  * 

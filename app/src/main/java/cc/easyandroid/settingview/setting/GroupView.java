@@ -7,16 +7,13 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import cc.easyandroid.settingview.config.DisplayOptions;
 import cc.easyandroid.settingview.config.GroupViewConfig;
-import cc.easyandroid.settingview.core.IRowStyle;
-import cc.easyandroid.settingview.core.UpDownAroundStyle;
 import cc.easyandroid.settingview.util.ApiCompatibleUtil;
-import cc.easyandroid.settingview.util.Listener.OnGroupViewItemClickListener;
-import cc.easyandroid.settingview.util.Listener.OnRowViewClickListener;
+import cc.easyandroid.settingview.util.Listener;
 import cc.easyandroid.settingview.util.Para;
 
-public class GroupView extends LinearLayout implements OnRowViewClickListener {
+
+public class GroupView extends LinearLayout implements Listener.OnRowViewClickListener {
 
 	private String mGorupViewTitle;
 
@@ -163,9 +160,9 @@ public class GroupView extends LinearLayout implements OnRowViewClickListener {
 		return addRowViewItem(clazz, 0, itemId, rowTitle, 0, 0, null);
 	}
 
-	private OnGroupViewItemClickListener mOnGroupViewItemClickListener;
+	private Listener.OnGroupViewItemClickListener mOnGroupViewItemClickListener;
 
-	public GroupView setOnItemClickListener(OnGroupViewItemClickListener listener) {
+	public GroupView setOnItemClickListener(Listener.OnGroupViewItemClickListener listener) {
 		mOnGroupViewItemClickListener = listener;
 		return this;
 	}

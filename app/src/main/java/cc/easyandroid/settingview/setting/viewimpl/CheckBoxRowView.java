@@ -9,6 +9,7 @@ import cc.easyandroid.settingview.setting.RowView;
 import cc.easyandroid.settingview.util.OnRowClickListener;
 import cc.easyandroid.settingview.util.RowViewActionEnum;
 
+
 public class CheckBoxRowView extends RowView {
 	private CheckBox checkBox;
 	private Boolean mChecked = false;// 当前值

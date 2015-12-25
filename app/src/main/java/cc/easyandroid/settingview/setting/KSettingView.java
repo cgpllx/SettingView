@@ -11,6 +11,7 @@ import android.widget.TextView;
 import cc.easyandroid.settingview.config.DisplayOptions;
 import cc.easyandroid.settingview.config.GroupViewConfig;
 
+
 public class KSettingView extends LinearLayout {
 
     public KSettingView(Context context, AttributeSet attrs, int defStyle) {

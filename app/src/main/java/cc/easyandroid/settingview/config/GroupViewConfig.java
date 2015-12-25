@@ -10,6 +10,7 @@ import cc.easyandroid.settingview.core.UpDownAroundStyle;
 import cc.easyandroid.settingview.setting.GroupView;
 import cc.easyandroid.settingview.util.ItemBgSelectorUtil;
 
+
 /**
  * GroupView的配置参数
  * 

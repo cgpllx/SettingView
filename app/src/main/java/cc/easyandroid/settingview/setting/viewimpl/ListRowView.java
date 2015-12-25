@@ -13,6 +13,7 @@ import cc.easyandroid.settingview.setting.DialogRowView;
 import cc.easyandroid.settingview.util.OnRowClickListener;
 import cc.easyandroid.settingview.util.RowViewActionEnum;
 
+
 public class ListRowView extends DialogRowView {
 	private ImageView child_ImageView;
 	private TextView value_TextView;

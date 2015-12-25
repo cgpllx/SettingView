@@ -15,174 +15,179 @@ import android.widget.TextView;
 import cc.easyandroid.settingview.setting.DialogRowView;
 import cc.easyandroid.settingview.util.Para;
 
+
 public class EditTextRowView extends DialogRowView {
-	private ImageView child_ImageView;
-	private TextView value_TextView;
+    private ImageView child_ImageView;
+    private TextView value_TextView;
 
-	/**
-	 * The edit text shown in the dialog.
-	 */
-	private EditText mEditText;
+    /**
+     * The edit text shown in the dialog.
+     */
+    private EditText mEditText;
 
-	private String mText;
+    public EditText getEditText() {
+        return mEditText;
+    }
 
-	public EditTextRowView(Context context) {
-		super(context);
-		mEditText = new EditText(context);
+    private String mText;
 
-		// Give it an ID so it can be saved/restored
-		mEditText.setId(android.R.id.edit);
+    public EditTextRowView(Context context) {
+        super(context);
+        mEditText = new EditText(context);
+
+        // Give it an ID so it can be saved/restored
+        mEditText.setId(android.R.id.edit);
 
 		/*
-		 * The preference framework and view framework both have an 'enabled' attribute. Most likely, the 'enabled' specified in this XML is for the preference framework, but it was also given to the view framework. We reset the enabled state.
+         * The preference framework and view framework both have an 'enabled' attribute. Most likely, the 'enabled' specified in this XML is for the preference framework, but it was also given to the view framework. We reset the enabled state.
 		 */
-		mEditText.setEnabled(true);
-		// int viewlayout_id = getResources().getIdentifier("edittext_container", "layout", getContext().getPackageName());
-		// setDialogLayoutResource(R.layout.edittext_container);
-	}
+        mEditText.setEnabled(true);
+        // int viewlayout_id = getResources().getIdentifier("edittext_container", "layout", getContext().getPackageName());
+        // setDialogLayoutResource(R.layout.edittext_container);
+    }
 
-	ViewGroup container;
+    ViewGroup container;
 
-	@Override
-	protected View onCreateDialogView() {
-		container = new LinearLayout(getContext());
-		return container;
-	}
+    @Override
+    protected View onCreateDialogView() {
+        container = new LinearLayout(getContext());
+        return container;
+    }
 
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-		showDialog();
-	}
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        showDialog();
+    }
 
-	@Override
-	protected void onDialogClosed(boolean positiveResult) {
-		super.onDialogClosed(positiveResult);
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
 
-		if (positiveResult) {
-			String value = mEditText.getText().toString();
-			setText(value);
-		}
-	}
+        if (positiveResult) {
+            String value = mEditText.getText().toString();
+            setText(value);
+        }
+    }
 
-	private void initValueData() {
-		value_TextView.setText(getText());
-	}
+    private void initValueData() {
+        value_TextView.setText(getText());
+    }
 
-	/**
-	 * Saves the text to the {@link SharedPreferences}.
-	 * 
-	 * @param text
-	 *            The text to save
-	 */
-	public void setText(String text) {
-		final boolean wasBlocking = shouldDisableDependents();
-		mText = text;
-		persistString(text);//保存值  赋值
-		initValueData();
-		if (para != null) {
-			para.value = mText;
-		}
-		final boolean isBlocking = shouldDisableDependents();
-		if (isBlocking != wasBlocking) {
-			// notifyDependencyChange(isBlocking);
-		}
-	}
+    /**
+     * Saves the text to the {@link SharedPreferences}.
+     *
+     * @param text The text to save
+     */
+    public void setText(String text) {
+        final boolean wasBlocking = shouldDisableDependents();
+        mText = text;
+        persistString(text);//保存值  赋值
+        initValueData();
+        if (para != null) {
+            para.value = mText;
+        }
+        final boolean isBlocking = shouldDisableDependents();
+        if (isBlocking != wasBlocking) {
+            // notifyDependencyChange(isBlocking);
+        }
+    }
 
-	public boolean shouldDisableDependents() {
-		return TextUtils.isEmpty(mText);
-	}
+    public boolean shouldDisableDependents() {
+        return TextUtils.isEmpty(mText);
+    }
 
-	public String getText() {
-		return mText;
-	}
+    public String getText() {
+        return mText;
+    }
 
-	@Override
-	protected void onBindDialogView(View view) {
-		super.onBindDialogView(view);
+    @Override
+    protected void onBindDialogView(View view) {
+        super.onBindDialogView(view);
 
-		EditText editText = mEditText;
-		editText.setText(getText());
+        EditText editText = mEditText;
+        editText.setText(getText());
 
-		ViewParent oldParent = editText.getParent();
-		if (oldParent != view) {
-			if (oldParent != null) {
-				((ViewGroup) oldParent).removeView(editText);
-			}
-			onAddEditTextToDialogView(view, editText);
-		}
-	}
+        ViewParent oldParent = editText.getParent();
+        if (oldParent != view) {
+            if (oldParent != null) {
+                ((ViewGroup) oldParent).removeView(editText);
+            }
+            onAddEditTextToDialogView(view, editText);
+        }
+    }
 
-	protected void onAddEditTextToDialogView(View dialogView, EditText editText) {
-		if (container != null) {
-			container.addView(editText, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		}
-	}
+    protected void onAddEditTextToDialogView(View dialogView, EditText editText) {
+        if (container != null) {
+            container.addView(editText, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+    }
 
-	/**
-	 * 初始化set的值
-	 */
-	@Override
-	protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-		setText(restoreValue ? getPersistedString(mText) : defaultValue.toString());
-	}
+    /**
+     * 初始化set的值
+     */
+    @Override
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+        setText(restoreValue ? getPersistedString(mText) : defaultValue.toString());
+    }
 
-	/**
-	 * 在这里初始化view显示的数据
-	 */
-	@Override
-	protected void onInitViewData() {
-		super.onInitViewData();
-		initValueData();
-	}
+    /**
+     * 在这里初始化view显示的数据
+     */
+    @Override
+    protected void onInitViewData() {
+        super.onInitViewData();
+        initValueData();
+    }
 
-	private Para<String> para;
+    private Para<String> para;
 
-	public void setPara(Para<String> para) {
-		this.para = para;
-	}
+    public void setPara(Para<String> para) {
+        this.para = para;
+    }
 
-	@Override
-	protected boolean needInputMethod() {
-		// We want the input method to show, if possible, when dialog is displayed
-		return true;
-	}
+    @Override
+    protected boolean needInputMethod() {
+        // We want the input method to show, if possible, when dialog is displayed
+        return true;
+    }
 
-	// --------------------------------------------------------------------------- view
-	/**
-	 * 初始化View
-	 */
-	@Override
-	public View initWidget() {
-		ininImageView();
-		initTextView();
-		LinearLayout layout = new LinearLayout(getContext());
-		layout.setOrientation(HORIZONTAL);
-		layout.setGravity(Gravity.CENTER);
-		layout.addView(value_TextView);
-		layout.addView(child_ImageView);
-		return layout;
-	}
+    // --------------------------------------------------------------------------- view
 
-	private void ininImageView() {
-		child_ImageView = new ImageView(getContext());
-		child_ImageView.setPadding(1, 0, 0, 0);
-	}
+    /**
+     * 初始化View
+     */
+    @Override
+    public View initWidget() {
+        ininImageView();
+        initTextView();
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(HORIZONTAL);
+        layout.setGravity(Gravity.CENTER);
+        layout.addView(value_TextView);
+        layout.addView(child_ImageView);
+        return layout;
+    }
 
-	private void initTextView() {
-		value_TextView = new TextView(getContext());
-		value_TextView.setPadding(10, 0, 10, 0);
-		value_TextView.setSingleLine(true);
-		value_TextView.setTextColor(getResources().getColor(android.R.color.darker_gray));
-		// TypedValue.applyDimension(TypedValue.TYPE_DIMENSION, value, get);
-		value_TextView.setTextSize(17);
-	}
+    private void ininImageView() {
+        child_ImageView = new ImageView(getContext());
+        child_ImageView.setPadding(1, 0, 0, 0);
+    }
 
-	// 右边的图片资源
-	@Override
-	public void addWidgetResource(int resId) {
-		child_ImageView.setImageResource(resId);
-	}
+    private void initTextView() {
+        value_TextView = new TextView(getContext());
+        value_TextView.setPadding(10, 0, 10, 0);
+        value_TextView.setSingleLine(true);
+        value_TextView.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        // TypedValue.applyDimension(TypedValue.TYPE_DIMENSION, value, get);
+        value_TextView.setTextSize(17);
+    }
 
-	// ---------------------------------------------------------------------------view
+    // 右边的图片资源
+    @Override
+    public void addWidgetResource(int resId) {
+        child_ImageView.setImageResource(resId);
+    }
+
+    // ---------------------------------------------------------------------------view
 }

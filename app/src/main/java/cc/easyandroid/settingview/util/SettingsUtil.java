@@ -9,6 +9,7 @@ import java.util.Set;
 
 import cc.easyandroid.settingview.setting.annomotion.IsPara;
 
+
 @SuppressWarnings("unchecked")
 public final class SettingsUtil {
 	private SharedPreferences mPreferences;
